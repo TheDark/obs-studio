@@ -32,6 +32,8 @@ struct ffmpeg_muxer {
 	int64_t save_ts;
 	int keyframes;
 	obs_hotkey_id hotkey;
+	obs_hotkey_id *hotkey_extra;
+	uint8_t hotkey_extra_count;
 	volatile bool muxing;
 	DARRAY(struct encoder_packet) mux_packets;
 
@@ -51,6 +53,8 @@ struct ffmpeg_muxer {
 	int64_t last_dts_usec;
 
 	bool is_network;
+
+	int64_t save_length_usec;
 };
 
 bool stopping(struct ffmpeg_muxer *stream);
