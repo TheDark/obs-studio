@@ -22,6 +22,38 @@ What is OBS Studio?
   It's distributed under the GNU General Public License v2 (or any later
   version) - see the accompanying COPYING file for more details.
 
+What is different in ths version?
+---------------------------------
+
+  This version is exactly the same as the official release, but has extended support
+  for Replay Buffer, allowing you to have multiple display buffer lengths and
+  associate a key bind to each one of them.
+
+  To use it, go to Settings - Output (1), and set the Output Mode to "Advanced" (2)
+
+  Click on the Replay Buffer tab (3) and there you should find a new list which
+  will hold your custom Replay Buffer lengths.
+
+  To add to this list, set the desired length on the Seconds box (4) and press
+  the Add button (5). Note that the length you pick should be smaller than the
+  "Maximum Replay Time" setting above. ie. If you set a custom value of 300 and
+  the Maximum value is at 100, only 100 seconds will be saved.
+
+  After you press the Add button, the value should appear on the list (6).
+
+  .. image:: https://thedark.github.io/imageshost/obs/RBL01.png
+    :alt: OBS settings Advanced Mode and Replay Buffer lengths list
+
+  After setting up all the values you want, click the Apply button in the lower
+  left to save your changes and head on to the Hotkeys page **(7)**, where you should
+  be able to find and set up the hotkeys for your custom Replay Buffer lengths
+  under the Replay Buffer section (8).
+
+  .. image:: https://thedark.github.io/imageshost/obs/RBL02.png
+    :alt: OBS settings Hotkeys settings for custom Replay Buffer lengths
+
+  And you're done. Click Apply or OK to save the changes and use OBS as ususal.
+
 Quick Links
 -----------
 

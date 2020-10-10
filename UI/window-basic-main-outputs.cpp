@@ -409,18 +409,21 @@ SimpleOutput::SimpleOutput(OBSBasic *main_) : BasicOutputHandler(main_)
 		bool useReplayBuffer = config_get_bool(main->Config(),
 						       "SimpleOutput", "RecRB");
 		if (useReplayBuffer) {
-			obs_data_t *hotkey;
 			const char *str = config_get_string(
 				main->Config(), "Hotkeys", "ReplayBuffer");
-			if (str)
-				hotkey = obs_data_create_from_json(str);
-			else
-				hotkey = nullptr;
+			obs_data_t *hotkey = str ? obs_data_create_from_json(str) : nullptr;
+			obs_data_t *settings = obs_data_create();
+			obs_data_set_string(
+				settings, "RecRBExtraLengths",
+				config_get_string(main->Config(), "AdvOut",
+						  "RecRBExtraLengths"));
+
 
 			replayBuffer = obs_output_create("replay_buffer",
 							 Str("ReplayBuffer"),
-							 nullptr, hotkey);
+							 settings, hotkey);
 
+			obs_data_release(settings);
 			obs_data_release(hotkey);
 			if (!replayBuffer)
 				throw "Failed to create replay buffer output "
@@ -1153,10 +1156,17 @@ AdvancedOutput::AdvancedOutput(OBSBasic *main_) : BasicOutputHandler(main_)
 			const char *str = config_get_string(
 				main->Config(), "Hotkeys", "ReplayBuffer");
 			obs_data_t *hotkey = obs_data_create_from_json(str);
+			obs_data_t *settings = obs_data_create();
+			obs_data_set_string(
+				settings, "RecRBExtraLengths",
+				config_get_string(main->Config(), "AdvOut",
+						  "RecRBExtraLengths"));
+
 			replayBuffer = obs_output_create("replay_buffer",
 							 Str("ReplayBuffer"),
-							 nullptr, hotkey);
+							 settings, hotkey);
 
+			obs_data_release(settings);
 			obs_data_release(hotkey);
 			if (!replayBuffer)
 				throw "Failed to create replay buffer output "
